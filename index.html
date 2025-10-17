@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqua-Craft - Charity Water Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🌊 AQUA-CRAFT 🌊</h1>
+            <p>Charity Water Game Proposal</p>
+        </div>
+
+        <div class="main-game">
+            <!-- Left Panel: Tools -->
+            <div class="panel">
+                <h2>💧 Water Filtration Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool" draggable="true" data-tool="boiling">
+                        <div class="tool-icon">🔥</div>
+                        <div class="tool-name">Boiling</div>
+                    </div>
+                    <div class="tool" draggable="true" data-tool="filter">
+                        <div class="tool-icon">🔬</div>
+                        <div class="tool-name">Carbon Filter</div>
+                    </div>
+                    <div class="tool" draggable="true" data-tool="chlorine">
+                        <div class="tool-icon">💊</div>
+                        <div class="tool-name">Chlorination</div>
+                    </div>
+                    <div class="tool" draggable="true" data-tool="uv">
+                        <div class="tool-icon">☀️</div>
+                        <div class="tool-name">UV Light</div>
+                    </div>
+                    <div class="tool" draggable="true" data-tool="sediment">
+                        <div class="tool-icon">🧪</div>
+                        <div class="tool-name">Sediment Filter</div>
+                    </div>
+                    <div class="tool" draggable="true" data-tool="reverse">
+                        <div class="tool-icon">♻️</div>
+                        <div class="tool-name">Reverse Osmosis</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center: Work Area -->
+            <div class="panel work-area">
+                <div class="water-display">
+                    <div class="water-logo">
+                        <img src="img/charity-water-logo.gif" alt="Charity Water Logo" class="logo-image">
+                        <span>charity: water</span>
+                    </div>
+                </div>
+               <div class="drop-zone" id="dropZone">
+                    <img src="img/water-bucket.jpg" alt="Water Bucket" class="bucket-image">
+                    <p>Drag and drop a filtration tool here</p>
+                </div>
+            </div>
+
+            <!-- Right Panel: Reports -->
+            <div class="panel">
+                <h2>🚨 Water Contaminant Report</h2>
+                <ul class="contamination-list">
+                    <li>🦠 Bacteria: High</li>
+                    <li>🧫 Viruses: Medium</li>
+                    <li>🪨 Sediment: High</li>
+                    <li>🧪 Chemicals: Low</li>
+                </ul>
+
+                <h2 style="margin-top: 20px;">💯 Water Purity Score</h2>
+                <div class="score-display">
+                    <h3>Score: <span id="score">0</span>/100</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rhythm Bar Modal -->
+    <div class="overlay" id="overlay"></div>
+    <div class="rhythm-bar-container" id="rhythmBarContainer">
+        <div class="rhythm-title">Hit the Green Zone!</div>
+        <div class="rhythm-bar">
+            <div class="rhythm-zones">
+                <div class="zone red"></div>
+                <div class="zone green"></div>
+                <div class="zone red"></div>
+            </div>
+            <div class="rhythm-indicator" id="rhythmIndicator"></div>
+        </div>
+        <button class="rhythm-button" id="rhythmButton">HIT IT!</button>
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

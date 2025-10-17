@@ -3,76 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aqua-Craft - Charity Water Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Aqua-Craft - Water Purification Lab</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="water-logo">
+                     <img src="img/charity-water-logo.gif" alt="Charity Water Logo" class="logo-image">
+                </div>
+                <div class="brand-text">
+                    <h1>charity: water</h1>
+                    <p>Water Purification Lab</p>
+                </div>
+            </div>
+            <div class="mission-text">
+                <p>Learn how clean water reaches communities in need</p>
+                <button href="https://www.charitywater.org/" class="donate-button">
+                    Donate Now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Difficulty Selection Modal -->
+    <div class="difficulty-modal" id="difficultyModal">
+        <div class="difficulty-content">
+            <h2>⚗️ Select Laboratory Difficulty</h2>
+            <p class="modal-subtitle">Choose your purification challenge level</p>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn easy" data-difficulty="easy">
+                    <span class="diff-icon">🧪</span>
+                    <span class="diff-label">Apprentice</span>
+                </button>
+                <button class="difficulty-btn medium" data-difficulty="medium">
+                    <span class="diff-icon">⚗️</span>
+                    <span class="diff-label">Chemist</span>
+                </button>
+                <button class="difficulty-btn hard" data-difficulty="hard">
+                    <span class="diff-icon">🔬</span>
+                    <span class="diff-label">Master</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Game Container -->
     <div class="game-container">
-        <div class="header">
-            <h1>🌊 AQUA-CRAFT 🌊</h1>
-            <p>Charity Water Game Proposal</p>
+        <div class="lab-title">
+            <h2>⚗️ Water Purification Laboratory</h2>
+            <p>Apply your knowledge to purify contaminated water</p>
         </div>
 
         <div class="main-game">
             <!-- Left Panel: Tools -->
-            <div class="panel">
-                <h2>💧 Water Filtration Tools</h2>
+            <div class="panel tools-panel">
+                <h3 class="panel-title">
+                    <span class="title-icon">🧪</span>
+                    Purification Methods
+                </h3>
                 <div class="tools-grid">
                     <div class="tool" draggable="true" data-tool="boiling">
                         <div class="tool-icon">🔥</div>
                         <div class="tool-name">Boiling</div>
+                        <div class="tool-hint">Heat treatment</div>
                     </div>
                     <div class="tool" draggable="true" data-tool="filter">
                         <div class="tool-icon">🔬</div>
                         <div class="tool-name">Carbon Filter</div>
+                        <div class="tool-hint">Particle removal</div>
                     </div>
                     <div class="tool" draggable="true" data-tool="chlorine">
                         <div class="tool-icon">💊</div>
                         <div class="tool-name">Chlorination</div>
+                        <div class="tool-hint">Chemical disinfection</div>
                     </div>
                     <div class="tool" draggable="true" data-tool="uv">
                         <div class="tool-icon">☀️</div>
                         <div class="tool-name">UV Light</div>
+                        <div class="tool-hint">Light sterilization</div>
                     </div>
                     <div class="tool" draggable="true" data-tool="sediment">
                         <div class="tool-icon">🧪</div>
                         <div class="tool-name">Sediment Filter</div>
+                        <div class="tool-hint">Physical filtration</div>
                     </div>
                     <div class="tool" draggable="true" data-tool="reverse">
                         <div class="tool-icon">♻️</div>
                         <div class="tool-name">Reverse Osmosis</div>
+                        <div class="tool-hint">Advanced system</div>
                     </div>
+                </div>
+                <div class="difficulty-indicator">
+                    <span class="indicator-label">Laboratory Level:</span>
+                    <span class="indicator-value" id="difficultyBadge">-</span>
                 </div>
             </div>
 
             <!-- Center: Work Area -->
             <div class="panel work-area">
-                <div class="water-display">
-                    <div class="water-logo">
-                        <img src="img/charity-water-logo.gif" alt="Charity Water Logo" class="logo-image">
-                        <span>charity: water</span>
+                <h3 class="panel-title">
+                    <span class="title-icon">⚗️</span>
+                    Purification Station
+                </h3>
+                <div class="water-sample">
+                    <div class="beaker">
+                        <div class="beaker-liquid"></div>
+                        <div class="beaker-label">Water Sample</div>
                     </div>
                 </div>
-               <div class="drop-zone" id="dropZone">
-                    <img src="img/water-bucket.jpg" alt="Water Bucket" class="bucket-image">
-                    <p>Drag and drop a filtration tool here</p>
+                <div class="drop-zone" id="dropZone">
+                    <div class="drop-icon">🧫</div>
+                    <p class="drop-instruction">Drop purification method here</p>
+                    <p class="drop-hint">Drag from the left panel</p>
                 </div>
             </div>
 
             <!-- Right Panel: Reports -->
-            <div class="panel">
-                <h2>🚨 Water Contaminant Report</h2>
-                <ul class="contamination-list">
-                    <li>🦠 Bacteria: High</li>
-                    <li>🧫 Viruses: Medium</li>
-                    <li>🪨 Sediment: High</li>
-                    <li>🧪 Chemicals: Low</li>
-                </ul>
-
-                <h2 style="margin-top: 20px;">💯 Water Purity Score</h2>
-                <div class="score-display">
-                    <h3>Score: <span id="score">0</span>/100</h3>
+            <div class="panel reports-panel">
+                <h3 class="panel-title">
+                    <span class="title-icon">📋</span>
+                    Contaminant Analysis
+                </h3>
+                <div class="contamination-card">
+                    <ul class="contamination-list" id="contaminationList"></ul>
                 </div>
+
+                <h3 class="panel-title" style="margin-top: 20px;">
+                    <span class="title-icon">💯</span>
+                    Purity Score
+                </h3>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span class="score-number" id="score">0</span>
+                        <span class="score-suffix">/100</span>
+                    </div>
+                    <div class="score-label">Water Quality Index</div>
+                </div>
+            </div>
+
+            <!-- Journal -->
+            <div class="panel journal-panel">
+                <h3 class="panel-title">
+                    <span class="title-icon">📖</span>
+                    Laboratory Notes
+                </h3>
+                <div class="journal" id="journalContent"></div>
             </div>
         </div>
     </div>
@@ -80,18 +158,49 @@
     <!-- Rhythm Bar Modal -->
     <div class="overlay" id="overlay"></div>
     <div class="rhythm-bar-container" id="rhythmBarContainer">
-        <div class="rhythm-title">Hit the Green Zone!</div>
+        <div class="rhythm-title">⚗️ Apply Treatment Carefully</div>
+        <div class="rhythm-subtitle">Hit the optimal zone for best results</div>
         <div class="rhythm-bar">
             <div class="rhythm-zones">
                 <div class="zone red"></div>
-                <div class="zone green"></div>
+                <div class="zone green">
+                    <span class="zone-label">OPTIMAL</span>
+                </div>
                 <div class="zone red"></div>
             </div>
             <div class="rhythm-indicator" id="rhythmIndicator"></div>
         </div>
-        <button class="rhythm-button" id="rhythmButton">HIT IT!</button>
+        <button class="rhythm-button" id="rhythmButton">
+            <span class="button-text">APPLY TREATMENT</span>
+        </button>
         <div class="feedback" id="feedback"></div>
     </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About charity: water</h4>
+                <p>We're a nonprofit organization bringing clean and safe water to people around the world. 100% of public donations go directly to water projects.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Our Impact</h4>
+                <ul class="impact-list">
+                    <li>💧 773+ million people lack clean water</li>
+                    <li>🌍 Projects in 29 countries</li>
+                    <li>👥 16+ million people served</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Get Involved</h4>
+                <p>Learn more about water purification and how you can help bring clean water to communities in need.</p>
+                <a href="https://www.charitywater.org" target="_blank" class="cta-button">Visit charity: water</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 charity: water. Educational game for learning purposes.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>

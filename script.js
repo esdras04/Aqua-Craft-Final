@@ -362,7 +362,7 @@ function showLoseMessage() {
     loseDiv.innerHTML = `
         <h2 style="color: #2c5f6f; margin-bottom: 15px; font-size: 2rem;">❌ Water NOT Purified!</h2>
         <p style="color: #5a8a9a; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
-            Water has high level of contaminants left! Try Again to purify the water sample.
+            Water has high level of contaminants left! The purity score should be 75 or greater, Try Again!
         <button onclick="location.reload()" style="
             padding: 15px 30px;
             background: linear-gradient(135deg, #2c8ba0 0%, #1a5f7a 100%);

@@ -61,6 +61,22 @@ const difficultySettings = {
     hard: { speed: 0.9, badge: 'Master', color: '#c85a54' }
 };
 
+document.addEventListener('dragover', (e) => {
+  const scrollSpeed = 15; // pixels per frame
+  const threshold = 100;  // how close to the edge triggers scroll
+
+  const y = e.clientY;
+  const windowHeight = window.innerHeight;
+
+  if (y < threshold) {
+    // Near top → scroll up
+    window.scrollBy(0, -scrollSpeed);
+  } else if (y > windowHeight - threshold) {
+    // Near bottom → scroll down
+    window.scrollBy(0, scrollSpeed);
+  }
+});
+
 // ===== Initialization Functions =====
 function initializeJournal() {
     journalContent.innerHTML = '';
@@ -87,7 +103,7 @@ function initializeContaminants() {
 function calculatePoints() {
     const numContaminants = contaminants[difficulty].length;
     perfectPoints = 100 / numContaminants;
-    goodPoints = perfectPoints / 2;
+    goodPoints = perfectPoints / 1.5;
 }
 
 // ===== Difficulty Selection =====
@@ -154,7 +170,12 @@ dropZone.addEventListener('drop', (e) => {
     dropZone.classList.remove('active');
     
     if (currentTool) {
+        if(toolEffects[currentTool].targets.some(target => contaminants[difficulty].includes(target) && !clearedContaminants.has(target))){
         startRhythmGame();
+        } else {
+            var invalidAudio = new Audio('/media/incorrect-ding.mp3');
+            invalidAudio.play();
+        }
     }
 });
 
@@ -168,13 +189,17 @@ function startRhythmGame() {
     // Reset and start animation
     rhythmIndicator.style.animation = 'none';
     setTimeout(() => {
-        rhythmIndicator.style.animation = `slideRhythm ${rhythmSpeed}s linear infinite`;
+       rhythmIndicator.style.animation = `slideRhythm ${rhythmSpeed}s infinite linear`;
     }, 10);
 }
 
 rhythmButton.addEventListener('click', () => {
     checkRhythm();
 });
+
+function checkTool(){
+
+}
 
 function checkRhythm() {
     const indicator = rhythmIndicator.getBoundingClientRect();
@@ -185,17 +210,22 @@ function checkRhythm() {
     let points = 0;
     let message = '';
     let feedbackClass = '';
+    var goodAudio = new Audio('/media/correct-ding.mp3');
+    var badAudio = new Audio('/media/incorrect-ding.mp3');
 
     // Check if in green zone (center third)
     if (position >= 0.33 && position <= 0.67) {
         // Perfect zone (center 40-60%)
         if (position >= 0.40 && position <= 0.60) {
             feedbackClass = 'perfect';
+            goodAudio.play();
         } else {
             feedbackClass = 'good';
+             goodAudio.play();
         }
     } else {
         feedbackClass = 'miss';
+        badAudio.play();
     }
 
     // Apply tool effects
@@ -221,7 +251,7 @@ function checkRhythm() {
     scoreDisplay.textContent = Math.round(newScore);
     
     // Check for game completion
-    if (newScore === 100 && score - points < 100) {
+    if ((newScore === 100 && score - points < 100) || (newScore>=75)) {
         triggerConfetti();
         setTimeout(() => {
             showCompletionMessage();
@@ -264,6 +294,7 @@ function markJournalEntry(tool) {
 function closeRhythmGame() {
     rhythmBarContainer.classList.remove('active');
     overlay.classList.remove('active');
+    rhythmIndicator.style.animation = 'none';
     currentTool = null;
 }
 
